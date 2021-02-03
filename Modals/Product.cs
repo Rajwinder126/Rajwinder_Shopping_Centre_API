@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace Rajwinder_Shopping_Centre_API.Modals
+    //this class is created for giving the information about product name,type,price and brand and catagory name
 {
     public class Product
     {

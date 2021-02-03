@@ -1,1 +1,2 @@
-﻿
+﻿Add-Migration Shopping_obj -context Rajwinder_Shopping_Centre_API_database
+ update-Database Shopping_obj -context Rajwinder_Shopping_Centre_API_database
