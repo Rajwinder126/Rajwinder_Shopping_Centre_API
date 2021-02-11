@@ -8,7 +8,7 @@
     <title>Rajwinder shopping Centre</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
-<body style="background-color:burlywood;">
+<body style="background-color:gray;">
     <div>
         <!-- Navigation bar code -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-warning">
@@ -54,7 +54,7 @@
 
                         </div>
                         <div class="form-group">
-                            <label for="publisher">Prpduct Price</label>
+                            <label for="publisher">Product Price</label>
                             <input type="number" class="form-control" id="Product_Price" aria-describedby="Product_PriceHelp" placeholder="Product Price">
                         </div>
 
@@ -87,7 +87,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">update Products Data</h5>
+                    <h5 class="modal-title">update Products </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -108,7 +108,7 @@
 
                         </div>
                         <div class="form-group">
-                            <label for="publisher">Prpduct Price</label>
+                            <label for="publisher">Product Price</label>
                             <input type="number" class="form-control" id="update_Product_Price" aria-describedby="Product_PriceHelp">
                         </div>
 
@@ -203,7 +203,7 @@
             }
         }
         // funtion to fill the data into update template
-        function getProductForUpdate(id) {
+        function getproductForUpdate(id) {
             $.ajax({
                 type: "GET",
                 url: uri + "/" + id,
@@ -211,8 +211,8 @@
             }).done(function (response) {
                 $('#Update_id').val(response.id);
                 $('#Update_product_Name').val(response.product_Name);
-                $('#Update_product_type').val(response.product_type);
-                $('#Update_product_price').val(response.product_price);
+                $('#Update_product_Type').val(response.product_Type);
+                $('#Update_product_Price').val(response.product_Price);
             });
                 $('#Update_brand_Name').val(response.brand_Name);
                 $('#Update_category_Name').val(response.category_Name);
@@ -221,9 +221,9 @@
         function updateproduct() {
             var _product_Name = $('#Update_product_Name').val();
             var _product_type = $('#Update_product_type').val();
-            var _student_Mobile = $('#Update_product_Price').val();
-            var _course_Name = $('#Update_brand_Name').val();
-            var _course_Duration = $('#Update_category_Name').val();
+            var _product_Price = $('#Update_product_Price').val();
+            var _brand_Name = $('#Update_brand_Name').val();
+            var _category_Name = $('#Update_category_Name').val();
             var ProductUpdate = {
                 id: parseInt($('#Update_id').val()),
                 product_Name: _product_Name,
@@ -239,7 +239,7 @@
                 contentType: "application/json; charset=utf-8"
             }).done(function (response) {
                 $("#update_result").html("Record is updated Successfully");
-                getAllProduct();
+                getAllProducts();
             }).fail(function (jqXHR, textStatus) {
                 $("#update_result").html("An error occured when updating product record.");
             });
