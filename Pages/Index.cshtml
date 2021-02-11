@@ -82,76 +82,188 @@
             </div>
         </div>
     </div>
+    <!-- below mentioned code will create the template to update a Product -->
+    <div class="modal" tabindex="-1" role="dialog" id="UpdateProducts">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">update Products Data</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <input type="hidden" class="form-control" id="Update_id" aria-describedby="IdHelp">
+                        </div>
+                        <div class="form-group">
+                            <label for="Product_Name">Product Name</label>
+                            <input type="text" class="form-control" id="update_Product_Name" aria-describedby="Product_NameHelp">
 
- <! -- java script files that will help to link the front end and back end -->
-<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
-<script src="https://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+                        </div>
+                        <div class="form-group">
+                            <label for="Product_Type">Product Type</label>
+                            <input type="text" class="form-control" id="update_Product_Type" aria-describedby="Product_TypeHelp">
 
-<script>
-    var uri = 'api/Products';
-    //Java script main function so JS start from here
-    $(document).ready(function () {
-        $.getJSON(uri)
-            .done(function (data) {
-                $("#ProductsTemplate").tmpl(data).appendTo("#allProducts");
-            });
-    });
-    // function to get all Products data and show on web page
-    function getAllProducts() {
-        $.getJSON(uri)
-            .done(function (data) {
-                $("#allProducts").text("");
-                $("#ProductsTemplate").tmpl(data).appendTo("#allProducts");
-            });
-    }
+                        </div>
+                        <div class="form-group">
+                            <label for="publisher">Prpduct Price</label>
+                            <input type="number" class="form-control" id="update_Product_Price" aria-describedby="Product_PriceHelp">
+                        </div>
 
-    // function to add data for new Product
-    function addProducts() {
-        var _Product_Name = $('#Product_Name').val();
-        var _Product_Type = $('#Product_Type').val();
-        var _Product_Price = parseFloat($('#Product_Price').val());
-        var _Brand_Name = $('#Brand_Name').val();
-        var _Category_Name = $('#Category_Name').val();
-        var Product = {
-            product_Name: _Product_Name,
-            product_Type: _Product_Type,
-            product_Price: _Product_Price,
-            brand_Name: _Brand_Name,
-            category_Name: _Category_Name
-        };
-        $.ajax({
-            type: "POST",
-            url: uri,
-            data: JSON.stringify(Product),
-            contentType: "application/json; charset=utf-8"
-        }).done(function (response) {
-            $("#result").html("Success");
-            getAllProducts();
-        }).fail(function (jqXHR, textStatus) {
-            $("#result").html("An error occured when Adding the bike record.");
-        });
-    }
-    
-</script>
-<!-- below mentioned code will create the template on the web page to display all Products -->
-<script id="ProductsTemplate" type="text/x-jquery-tmpl">
-    <div class="col-lg-3" style="margin:10px;">
-        <div class="card card text-white bg-dark border-warning mb-3" style="width: 18rem; padding:20px">
-            <div class="card-body">
-                <h5 class="card-title">Product Name: ${product_Name}</h5>
-                <p class="card-text">Product Type :  ${product_Type}</p>
-                <p class="card-text">Product Price : ${product_Price}</p>
-                <p class="card-text">Brand Name :    ${brand_Name}</p>
-                <p class="card-text">Catogroy Name : ${category_Name}</p>
+                        <div class="form-group">
+                            <label for="Brand_Name">Brand Name</label>
+                            <input type="text" class="form-control" id="update_Brand_Name" aria-describedby="Brand_NameHelp">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="Category_Name">Category Name</label>
+                            <input type="text" class="form-control" id="update_Category_Name" aria-describedby="Category_NameHelp">
+                        </div>
+
+                        <div class="form-group" id="result">
+
+
+                        </div>
+                        <button type="button" class="btn btn-primary" onclick="updateProducts()">update Products</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                </div>
             </div>
-            <span>
-                <button class="btn btn-primary" onclick="getbookForUpdate('${Id}')" data-toggle="modal" data-target="#UpdateBooks">Update</button>
-                <a href="#" class="btn btn-danger" onclick="remove('${Id}')">Delete</a>
-            </span>
         </div>
     </div>
-</script>
+
+    <! -- java script files that will help to link the front end and back end -->
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <script>
+        var uri = 'api/Products';
+        //Java script main function so JS start from here
+        $(document).ready(function () {
+            $.getJSON(uri)
+                .done(function (data) {
+                    $("#ProductsTemplate").tmpl(data).appendTo("#allProducts");
+                });
+        });
+        // function to get all Products data and show on web page
+        function getAllProducts() {
+            $.getJSON(uri)
+                .done(function (data) {
+                    $("#allProducts").text("");
+                    $("#ProductsTemplate").tmpl(data).appendTo("#allProducts");
+                });
+        }
+
+        // function to add data for new Product
+        function addProducts() {
+            var _Product_Name = $('#Product_Name').val();
+            var _Product_Type = $('#Product_Type').val();
+            var _Product_Price = parseFloat($('#Product_Price').val());
+            var _Brand_Name = $('#Brand_Name').val();
+            var _Category_Name = $('#Category_Name').val();
+            var Product = {
+                product_Name: _Product_Name,
+                product_Type: _Product_Type,
+                product_Price: _Product_Price,
+                brand_Name: _Brand_Name,
+                category_Name: _Category_Name
+            };
+            $.ajax({
+                type: "POST",
+                url: uri,
+                data: JSON.stringify(Product),
+                contentType: "application/json; charset=utf-8"
+            }).done(function (response) {
+                $("#result").html("New Product Data is Add Successfully");
+                getAllProducts();
+            }).fail(function (jqXHR, textStatus) {
+                $("#result").html("An error occured when Adding the Product record.");
+            });
+        }
+        //funtion to delete a particular product based on id
+        function remove(id) {
+            var yes = confirm("Are you sure you want to delete this Product?");
+            if (yes) {
+                $.ajax({
+                    type: "DELETE",
+                    url: uri + "/" + id,
+                }).done(function (response) {
+                    $("#result").html("New Product Data is Deleted Successfully");
+                    getAllProducts();
+                }).fail(function (jqXHR, textStatus) {
+                    $("#result").html("An error occured when deleting the Product record.");
+                });
+            }
+        }
+        // funtion to fill the data into update template
+        function getProductForUpdate(id) {
+            $.ajax({
+                type: "GET",
+                url: uri + "/" + id,
+                contentType: "application/json"
+            }).done(function (response) {
+                $('#Update_id').val(response.id);
+                $('#Update_product_Name').val(response.product_Name);
+                $('#Update_product_type').val(response.product_type);
+                $('#Update_product_price').val(response.product_price);
+            });
+                $('#Update_brand_Name').val(response.brand_Name);
+                $('#Update_category_Name').val(response.category_Name);
+        }
+        // function to update data of the product
+        function updateproduct() {
+            var _product_Name = $('#Update_product_Name').val();
+            var _product_type = $('#Update_product_type').val();
+            var _student_Mobile = $('#Update_product_Price').val();
+            var _course_Name = $('#Update_brand_Name').val();
+            var _course_Duration = $('#Update_category_Name').val();
+            var ProductUpdate = {
+                id: parseInt($('#Update_id').val()),
+                product_Name: _product_Name,
+                product_type: _product_type,
+                product_price: _product_price,
+                brand_Name: _brand_Name,
+                category_Name: _category_Name
+            };
+            $.ajax({
+                type: "PUT",
+                url: uri + "/" + $('#Update_id').val(),
+                data: JSON.stringify(ProductUpdate),
+                contentType: "application/json; charset=utf-8"
+            }).done(function (response) {
+                $("#update_result").html("Record is updated Successfully");
+                getAllProduct();
+            }).fail(function (jqXHR, textStatus) {
+                $("#update_result").html("An error occured when updating product record.");
+            });
+        }
+
+    </script>
+    <!-- below mentioned code will create the template on the web page to display all Products -->
+    <script id="ProductsTemplate" type="text/x-jquery-tmpl">
+        <div class="col-lg-3" style="margin:10px;">
+            <div class="card card text-white bg-dark border-warning mb-3" style="width: 18rem; padding:20px">
+                <div class="card-body">
+                    <h5 class="card-title">Product Name: ${product_Name}</h5>
+                    <p class="card-text">Product Type :  ${product_Type}</p>
+                    <p class="card-text">Product Price : ${product_Price}</p>
+                    <p class="card-text">Brand Name :    ${brand_Name}</p>
+                    <p class="card-text">Catogroy Name : ${category_Name}</p>
+                </div>
+                <span>
+                    <button class="btn btn-primary" onclick="getproductForUpdate('${id}')" data-toggle="modal" data-target="#UpdateProducts">Update</button>
+                    <a href="#" class="btn btn-danger" onclick="remove('${id}')">Delete</a>
+                </span>
+            </div>
+        </div>
+
+    </script>
 </body>
 </html>
